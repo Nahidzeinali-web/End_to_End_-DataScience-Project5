@@ -1,61 +1,59 @@
 
-# 🧪 Data Ingestion Pipeline with Google Cloud Storage and Train/Test Splitting
+# 🏨 Hotel Review Sentiment Analysis Pipeline
 
-This project demonstrates an automated data ingestion pipeline that:
-- Downloads a CSV dataset from a Google Cloud Storage (GCS) bucket,
-- Saves the file locally,
-- Splits the data into train and test sets,
-- Logs the entire process using a custom logger,
-- Handles exceptions using a custom exception class.
-
----
+This project demonstrates a comprehensive machine learning pipeline for sentiment analysis of hotel reviews, utilizing Python. It incorporates modular code design, experiment tracking, CI/CD, and containerization, making it suitable for production-ready deployment.
 
 ## 📁 Project Structure
 
 ```
-project-root/
+PROJECT CODE/
 │
-├── src/
-│   ├── logger.py               # Custom logger setup
-│   ├── custom_exception.py     # Custom exception class
+├── application.py              # Main app interface (Flask/FastAPI)
+├── requirements.txt            # Python dependencies
+├── Dockerfile                  # For containerizing the app
+├── Jenkinsfile                 # CI/CD automation with Jenkins
+├── setup.py                    # Package setup file
 │
-├── config/
-│   ├── paths_config.py         # Constants for paths (RAW_DIR, TRAIN_FILE_PATH, etc.)
-│   └── config.yaml             # Configuration file (bucket name, filename, split ratio)
+├── config/                     # Configuration files and constants
+│   ├── config.yaml             # Central YAML configuration
+│   ├── model_params.py         # Model hyperparameters
+│   ├── paths_config.py         # File path constants
+│   └── __init__.py
 │
-├── utils/
-│   └── common_functions.py     # Utility functions (e.g., read_yaml)
+├── data/                       # Processed datasets
+├── src/                        # Core codebase (models, utils, etc.)
+│   ├── data_loader.py
+│   ├── model_trainer.py
+│   ├── logger.py
+│   └── custom_exception.py
 │
-├── data/                       # Stores downloaded and split datasets
-│   ├── raw/
-│   ├── train/
-│   └── test/
-│
-├── main.py                     # Entry point to run the pipeline
-└── README.md                   # You are here
+└── artifacts/                  # Saved models and results
 ```
 
----
+## 🔧 Features
 
-## ⚙️ Configuration (`config.yaml`)
+- **Data Preprocessing:** Loads and cleans hotel review data.
+- **Model Training:** Trains machine learning models (e.g., Random Forest, Logistic Regression).
+- **Evaluation:** Includes metrics such as accuracy, precision, recall, and confusion matrix.
+- **CI/CD:** Jenkins integration for continuous deployment.
+- **Dockerized:** Easily deployable using Docker.
+- **Logging & Exceptions:** Robust error handling and custom logging.
+- **Modular Design:** Clear separation of configuration, code, and data.
 
-```yaml
-data_ingestion:
-  bucket_name: "your-gcp-bucket-name"
-  bucket_file_name: "your-data.csv"
-  train_ratio: 0.8
+## 🚀 Getting Started
+
+### Prerequisites
+
+Install required packages:
+
+```bash
+pip install -r requirements.txt
 ```
 
----
+### Run Application
 
-## 🛠 How It Works
-
-1. **Read config** from `config.yaml` using `read_yaml`.
-2. **Download CSV** from GCP using the `google-cloud-storage` client.
-3. **Save it locally** in the `raw/` directory.
-4. **Split the dataset** into training and testing sets using `scikit-learn`.
-5. **Store results** in `train/` and `test/` directories.
-6. **Log messages** during each step, including timestamps, using a custom logger.
-7. **Handle errors** gracefully using a `CustomException`.
+```bash
+python application.py
+```
 
 
