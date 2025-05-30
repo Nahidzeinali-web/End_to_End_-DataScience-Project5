@@ -22,14 +22,14 @@ pipeline {
             }
         }
 
-        stage('Diagnose Python') {
+        stage('Check Python') {
             steps {
                 script {
-                    bat """
-                    echo 🔍 Checking Python location and version...
-                    where python
-                    python --version
-                    """
+                    sh '''
+                    echo "🔍 Checking Python..."
+                    which python3
+                    python3 --version
+                    '''
                 }
             }
         }
@@ -37,27 +37,25 @@ pipeline {
         stage('List Files') {
             steps {
                 script {
-                    bat """
-                    echo 📁 Listing workspace files...
-                    dir
-                    type requirements.txt
-                    """
+                    sh '''
+                    echo "📁 Listing workspace files..."
+                    ls -l
+                    cat requirements.txt
+                    '''
                 }
             }
         }
 
-        stage('Create Venv + Install Dependencies') {
+        stage('Create Virtual Environment and Install Dependencies') {
             steps {
                 script {
-                    bat """
-                    echo 🛠 Creating virtual environment...
-                    python -m venv %VENV_DIR%
-
-                    echo 🔄 Activating environment + installing requirements...
-                    call %VENV_DIR%\\Scripts\\activate
+                    sh '''
+                    echo "🛠 Creating virtual environment..."
+                    python3 -m venv ${VENV_DIR}
+                    source ${VENV_DIR}/bin/activate
                     pip install --upgrade pip
                     pip install -r requirements.txt
-                    """
+                    '''
                 }
             }
         }
@@ -65,7 +63,7 @@ pipeline {
         stage('Done') {
             steps {
                 script {
-                    bat "echo ✅ Jenkins pipeline completed successfully!"
+                    sh 'echo ✅ Jenkins pipeline completed successfully!'
                 }
             }
         }
