@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Cloning GitHub repo to Jenkins') {
+        stage('Clone GitHub Repo') {
             steps {
                 script {
-                    echo 'Cloning GitHub repo to Jenkins............'
+                    echo '🔄 Cloning GitHub repository...'
                     checkout scmGit(
                         branches: [[name: '*/main']],
                         extensions: [],
@@ -18,15 +18,23 @@ pipeline {
             }
         }
 
-        stage('Installing dependencies without venv') {
+        stage('Install Dependencies (no venv, override PEP 668)') {
             steps {
                 script {
-                    echo 'Installing dependencies directly using pip............'
+                    echo '📦 Installing dependencies using pip with --break-system-packages...'
                     sh '''
                     python3 --version
-                    pip3 install --upgrade pip
-                    pip3 install -r requirements.txt
+                    pip3 install --upgrade pip --break-system-packages
+                    pip3 install --break-system-packages -r requirements.txt
                     '''
+                }
+            }
+        }
+
+        stage('✅ Pipeline Complete') {
+            steps {
+                script {
+                    sh 'echo "🎉 All done! Dependencies installed."'
                 }
             }
         }
