@@ -189,8 +189,3 @@ docker restart jenkins-dind
 ```
 
 > ✅ Now Jenkins is ready to automate builds, and your app is Dockerized for deployment.
-
-🎥 Check tutorial videos for the remaining steps. You can always copy code from this guide as needed.
-=======
-
->>>>>>> b97a025bc36a7a4c7f96be4b6ee85f74851e0a04
