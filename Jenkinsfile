@@ -6,10 +6,10 @@ pipeline {
     }
 
     stages {
-        stage('Cloning Repo') {
+        stage('Clone Repo') {
             steps {
                 script {
-                    echo 'Cloning GitHub repository...'
+                    echo '🔄 Cloning GitHub repository...'
                     checkout scmGit(
                         branches: [[name: '*/main']],
                         extensions: [],
@@ -22,10 +22,11 @@ pipeline {
             }
         }
 
-        stage('Check Python Setup') {
+        stage('Diagnose Python') {
             steps {
                 script {
                     bat """
+                    echo 🔍 Checking Python location and version...
                     where python
                     python --version
                     """
@@ -33,11 +34,26 @@ pipeline {
             }
         }
 
-        stage('Set Up Virtual Environment') {
+        stage('List Files') {
             steps {
                 script {
                     bat """
+                    echo 📁 Listing workspace files...
+                    dir
+                    type requirements.txt
+                    """
+                }
+            }
+        }
+
+        stage('Create Venv + Install Dependencies') {
+            steps {
+                script {
+                    bat """
+                    echo 🛠 Creating virtual environment...
                     python -m venv %VENV_DIR%
+
+                    echo 🔄 Activating environment + installing requirements...
                     call %VENV_DIR%\\Scripts\\activate
                     pip install --upgrade pip
                     pip install -r requirements.txt
@@ -46,10 +62,10 @@ pipeline {
             }
         }
 
-        stage('Success Message') {
+        stage('Done') {
             steps {
                 script {
-                    bat "echo 🎉 Jenkins pipeline with virtual environment completed!"
+                    bat "echo ✅ Jenkins pipeline completed successfully!"
                 }
             }
         }
