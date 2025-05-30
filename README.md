@@ -52,8 +52,6 @@ pip install -r requirements.txt
 ```bash
 python application.py
 ```
-
-<<<<<<< HEAD
 ---
 
 ## ⚙️ Jenkins and Docker Setup (Local)
@@ -62,7 +60,7 @@ python application.py
 
 - Download Docker Desktop from the official website and **run it in the background**.
 
-### 2. Setup Jenkins in Docker
+### 2. Set up Jenkins in Docker
 
 #### Create Jenkins Setup
 
@@ -98,7 +96,7 @@ cd custom_jenkins
 docker build -t jenkins-dind .
 docker images
 
-docker run -d --name jenkins-dind ^
+docker run -d-- name jenkins-dind ^
 --privileged ^
 -p 8080:8080 -p 50000:50000 ^
 -v //var/run/docker.sock:/var/run/docker.sock ^
@@ -190,8 +188,3 @@ docker restart jenkins-dind
 ```
 
 > ✅ Now Jenkins is ready to automate builds, and your app is Dockerized for deployment.
-
-🎥 Check tutorial videos for remaining steps. You can always copy code from this guide as needed.
-=======
-
->>>>>>> b97a025bc36a7a4c7f96be4b6ee85f74851e0a04
