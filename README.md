@@ -1,10 +1,4 @@
 # 🏨 Hotel Reservation Prediction Pipeline
-
-<<<<<<< HEAD
-=======
-# 🏨 Hotel Reservation Prediction Pipeline
-
->>>>>>> b97a025bc36a7a4c7f96be4b6ee85f74851e0a04
 This project demonstrates a comprehensive machine learning pipeline for reservation prediction, utilizing Python. It incorporates modular code design, experiment tracking, CI/CD, and containerization, making it suitable for production-ready deployment.
 
 ## 📁 Project Structure
