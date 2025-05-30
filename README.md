@@ -1,7 +1,7 @@
 
-# 🏨 Hotel Review Sentiment Analysis Pipeline
+# 🏨 Hotel Reservation Prediction Pipeline
 
-This project demonstrates a comprehensive machine learning pipeline for sentiment analysis of hotel reviews, utilizing Python. It incorporates modular code design, experiment tracking, CI/CD, and containerization, making it suitable for production-ready deployment.
+This project demonstrates a comprehensive machine learning pipeline for reservation prediction, utilizing Python. It incorporates modular code design, experiment tracking, CI/CD, and containerization, making it suitable for production-ready deployment.
 
 ## 📁 Project Structure
 
