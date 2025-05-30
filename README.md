@@ -1,5 +1,10 @@
 # 🏨 Hotel Reservation Prediction Pipeline
 
+<<<<<<< HEAD
+=======
+# 🏨 Hotel Reservation Prediction Pipeline
+
+>>>>>>> b97a025bc36a7a4c7f96be4b6ee85f74851e0a04
 This project demonstrates a comprehensive machine learning pipeline for reservation prediction, utilizing Python. It incorporates modular code design, experiment tracking, CI/CD, and containerization, making it suitable for production-ready deployment.
 
 ## 📁 Project Structure
@@ -55,6 +60,7 @@ pip install -r requirements.txt
 python application.py
 ```
 
+<<<<<<< HEAD
 ---
 
 ## ⚙️ Jenkins and Docker Setup (Local)
@@ -193,3 +199,6 @@ docker restart jenkins-dind
 > ✅ Now Jenkins is ready to automate builds, and your app is Dockerized for deployment.
 
 🎥 Check tutorial videos for remaining steps. You can always copy code from this guide as needed.
+=======
+
+>>>>>>> b97a025bc36a7a4c7f96be4b6ee85f74851e0a04
