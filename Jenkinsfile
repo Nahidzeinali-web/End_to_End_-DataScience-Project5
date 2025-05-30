@@ -1,15 +1,11 @@
 pipeline {
     agent any
 
-    environment {
-        VENV_DIR = 'venv'
-    }
-
     stages {
-        stage('Clone Repo') {
+        stage('Cloning GitHub repo to Jenkins') {
             steps {
                 script {
-                    echo '🔄 Cloning GitHub repository...'
+                    echo 'Cloning GitHub repo to Jenkins............'
                     checkout scmGit(
                         branches: [[name: '*/main']],
                         extensions: [],
@@ -22,48 +18,15 @@ pipeline {
             }
         }
 
-        stage('Check Python') {
+        stage('Installing dependencies without venv') {
             steps {
                 script {
+                    echo 'Installing dependencies directly using pip............'
                     sh '''
-                    echo "🔍 Checking Python..."
-                    which python3
                     python3 --version
+                    pip3 install --upgrade pip
+                    pip3 install -r requirements.txt
                     '''
-                }
-            }
-        }
-
-        stage('List Files') {
-            steps {
-                script {
-                    sh '''
-                    echo "📁 Listing workspace files..."
-                    ls -l
-                    cat requirements.txt
-                    '''
-                }
-            }
-        }
-
-        stage('Create Virtual Environment and Install Dependencies') {
-            steps {
-                script {
-                    sh '''
-                    echo "🛠 Creating virtual environment..."
-                    python3 -m venv ${VENV_DIR}
-                    source ${VENV_DIR}/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                    '''
-                }
-            }
-        }
-
-        stage('Done') {
-            steps {
-                script {
-                    sh 'echo ✅ Jenkins pipeline completed successfully!'
                 }
             }
         }
