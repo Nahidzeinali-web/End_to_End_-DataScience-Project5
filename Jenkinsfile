@@ -1,40 +1,26 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Clone GitHub Repo') {
-            steps {
-                script {
-                    echo '🔄 Cloning GitHub repository...'
-                    checkout scmGit(
-                        branches: [[name: '*/main']],
-                        extensions: [],
-                        userRemoteConfigs: [[
-                            credentialsId: 'github-token',
-                            url: 'https://github.com/Nahidzeinali-web/End_to_End_-DataScience-Project5.git'
-                        ]]
-                    )
+    stages{
+        stage('Cloning Github repo to Jenkins'){
+            steps{
+                script{
+                    echo 'Cloning Github repo to Jenkins............'
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/Nahidzeinali-web/End_to_End_-DataScience-Project5.git']])
                 }
             }
         }
 
-        stage('Install Dependencies (no venv, override PEP 668)') {
-            steps {
-                script {
-                    echo '📦 Installing dependencies using pip with --break-system-packages...'
+        stage('Setting up our Virtual Environment and Installing dependancies'){
+            steps{
+                script{
+                    echo 'Setting up our Virtual Environment and Installing dependancies............'
                     sh '''
-                    python3 --version
-                    pip3 install --upgrade pip --break-system-packages
-                    pip3 install --break-system-packages -r requirements.txt
+                    python -m venv ${VENV_DIR}
+                    . ${VENV_DIR}/bin/activate
+                    pip install --upgrade pip
+                    pip install -e .
                     '''
-                }
-            }
-        }
-
-        stage('✅ Pipeline Complete') {
-            steps {
-                script {
-                    sh 'echo "🎉 All done! Dependencies installed."'
                 }
             }
         }
